@@ -15,12 +15,25 @@ export default function App() {
     setCurrentIndex(index);
   };
 
-  // Prev y Next ahora son cíclicos
   const handlePrev = () => {
+    // explanation: when reaching the start, it goes back to the end
+    // if prev is 0, (0 - 1 + 6) % 6 = 5
+    // if prev is 1, (1 - 1 + 6) % 6 = 0
+    // if prev is 2, (2 - 1 + 6) % 6 = 1
+    // if prev is 3, (3 - 1 + 6) % 6 = 2
+    // if prev is 4, (4 - 1 + 6) % 6 = 3
+    // if prev is 5, (5 - 1 + 6) % 6 = 4
     setCurrentIndex((prev) => (prev - 1 + totalUsers) % totalUsers);
   };
 
   const handleNext = () => {
+    // explanation: when reaching the end, it goes back to the start
+    // if prev is 5, (5 + 1) % 6 = 0
+    // if prev is 4, (4 + 1) % 6 = 5
+    // if prev is 3, (3 + 1) % 6 = 4
+    // if prev is 2, (2 + 1) % 6 = 3
+    // if prev is 1, (1 + 1) % 6 = 2
+    // if prev is 0, (0 + 1) % 6 = 1
     setCurrentIndex((prev) => (prev + 1) % totalUsers);
   };
 
@@ -28,7 +41,6 @@ export default function App() {
     <div>
       <h1>Patient Appointments</h1>
 
-      {/* Select de pacientes */}
       <select value={currentUser.idPerson} onChange={handleSelectChange}>
         {usersData.map((user) => (
           <option key={user.idPerson} value={user.idPerson}>
@@ -37,13 +49,11 @@ export default function App() {
         ))}
       </select>
 
-      {/* Botones de navegación */}
       <div>
         <button onClick={handlePrev}>Prev</button>
         <button onClick={handleNext}>Next</button>
       </div>
 
-      {/* Mostrar citas */}
       <h2>Appointments for {currentUser.data[0].name}</h2>
       <ul style={{ textAlign: 'left' }}>
         {currentUser.data.map((appointment) => (
