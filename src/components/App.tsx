@@ -45,7 +45,7 @@ export default function App() {
 
       {/* Mostrar citas */}
       <h2>Appointments for {currentUser.data[0].name}</h2>
-      <ul>
+      <ul style={{ textAlign: 'left' }}>
         {currentUser.data.map((appointment) => (
           <li key={`${appointment.idPerson}-${appointment.doctor}`}>
             Doctor: {appointment.doctor} - Conclusion: {appointment.conclusion}
